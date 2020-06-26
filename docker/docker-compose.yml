@@ -1,0 +1,47 @@
+version: '3.6'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  tickets-database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=anton
+      - POSTGRES_PASSWORD=not_very_secure
+      - POSTGRES_DB=tickets_db
+    ports:
+      - "5481:5432"
+    volumes:
+      - type: bind
+        source: ./db/tickets
+        target: /var/lib/postgresql/data
+
+  rides-database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=anton
+      - POSTGRES_PASSWORD=not_very_secure
+      - POSTGRES_DB=rides_db
+    ports:
+      - "5482:5432"
+    volumes:
+      - type: bind
+        source: ./db/rides
+        target: /var/lib/postgresql/data
+
+  routes-database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=anton
+      - POSTGRES_PASSWORD=not_very_secure
+      - POSTGRES_DB=routes_db
+    ports:
+      - "5483:5432"
+    volumes:
+      - type: bind
+        source: ./db/routes
+        target: /var/lib/postgresql/data

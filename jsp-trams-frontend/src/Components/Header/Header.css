@@ -1,0 +1,16 @@
+.tab.selected {
+    background-color: lightblue;
+    color: darkblue;
+    text-decoration: underline;
+}
+
+.tab:hover:not(.selected) {
+    font-weight: bold;
+    color: blue;
+    text-decoration: underline lightblue;
+}
+
+.tab {
+    border: lightgray solid 2px;
+    height: 10vh;
+}

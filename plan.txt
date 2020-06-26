@@ -1,0 +1,110 @@
+JSP Tickets:
+Customers buy tickets which can be used 1 -> N times
+BusRides are weekly on specific times from specific lines
+Conductors check multiple tickets for rides, which in turn sets the BusRides as completed and Tickets decremented
+
+
+
+
+in route-management:
+	store stops, rides
+
+in ride-management:
+	store conductor, completedRides
+
+in ticket-management:
+	store tickets
+
+to create stops:
+	use data generator
+
+to create rides:
+	through ride-management
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Customer ValueObject:
+	name: string
+
+Conductor Entity:
+	id: int
+	name: string
+	employeeSince: LocalDate
+
+Ticket Entity:
+	id: int
+	customer: <embedded> Customer
+	boughtOn: LocalDateTime
+	expiryDate: LocalDate
+	usages: <embedded> Usages
+
+Usages ValueObject:
+	initial: int
+	left: int
+
+Ride Entity:
+	id: int
+	route: <embedded> Route
+	occurence: List<TimePoint>
+	stops: List<Stop>
+
+RideCheck Event:
+	id: int
+	ride: Ride
+	completedOn: LocalDateTime
+	conductor: Conductor
+	tickets: List<Ticket>
+
+CompletedRide Entity:
+	id: int
+	ride: Ride
+	completedOn: LocalDateTime
+	conductor: Conductor
+
+TimePoint ValueObject:
+	time: Time
+	day: Day
+
+Time ValueObject:
+	hours: int
+	minutes: int
+
+Day ValueObject:
+	enumeration
+
+Route ValueObject:
+	name: string
+	number: string
+	length: Distance
+
+Distance:
+	meters: int
+
+Stop Entity:
+	id: int
+	name: string
+	number: string
+	location: MapPoint
+
+MapPoint ValueObject:
+	latitude: double
+	longitude: double

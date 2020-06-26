@@ -1,0 +1,15 @@
+Developer Tools:
+	Spring Boot DevTools
+	Spring Configuration Processor
+Web
+	Spring Web
+SQL
+	JDBC API
+	Spring Data JPA
+	H2 Database
+	PostgreSQL Driver
+Messaging
+	Spring Integration
+	Spring for RabbitMQ
+Ops
+	Spring Boot Actuator

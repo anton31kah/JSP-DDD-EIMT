@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="time-management" />
+        <module name="ticket-management" />
+        <module name="ride-management" />
+        <module name="route-management" />
+        <module name="shared-kernel" />
+        <module name="jsp-ddd-eimt" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="z-module" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ride-management" options="-parameters" />
+      <module name="route-management" options="-parameters" />
+      <module name="shared-kernel" options="-parameters" />
+      <module name="ticket-management" options="-parameters" />
+      <module name="time-management" options="-parameters" />
+      <module name="z-module" options="-parameters" />
+    </option>
+  </component>
+</project>

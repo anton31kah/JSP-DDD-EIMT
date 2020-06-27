@@ -24,17 +24,7 @@ class TicketMarketController(
     }
 
     @GetMapping
-    fun getInfo(@RequestParam(name = "name", required = false, defaultValue = "!") customerName: String,
-                @RequestParam(name = "id", required = false, defaultValue = "!") ticketId: String
-    ): List<Ticket> {
-        if (customerName != "!") {
-            return ticketInfo.locateByCustomerName(customerName)
-        }
-
-        if (ticketId != "!") {
-            return ticketInfo.locateByTicketId(ticketId)
-        }
-
-        return emptyList()
+    fun getInfo(@RequestParam(name = "name") customerName: String): List<Ticket> {
+        return ticketInfo.locateByCustomerName(customerName)
     }
 }

@@ -4,7 +4,7 @@ import java.util.*
 import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
-open class DomainObjectId(private val id: String) : ValueObject {
+open class DomainObjectId(val id: String) : ValueObject {
     companion object {
         fun <ID : DomainObjectId> randomId(idClass: Class<ID>): ID {
             try {

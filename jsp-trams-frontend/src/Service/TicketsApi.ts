@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { TicketPlan } from "../Models/TicketPlan";
+import { Ticket, TicketId } from "../Models/Ticket";
 
 const instance = axios.create({
     baseURL: "http://localhost:8081",
@@ -7,10 +8,6 @@ const instance = axios.create({
         "Access-Control-Allow-Origin": "*"
     },
 });
-
-interface TicketId {
-    id: string
-}
 
 export class TicketsApi {
     static getPlans(): Promise<AxiosResponse<TicketPlan[]>> {
@@ -31,15 +28,7 @@ export class TicketsApi {
         return Promise.resolve(ticketIds);
     }
 
-    static async getInfo(customerName?: string, ticketId?: string): Promise<any[]> {
-        if (customerName) {
-            return await instance.get(`/?name=${customerName}`)
-        }
-
-        if (ticketId) {
-            return await instance.get(`/?id=${ticketId}`)
-        }
-
-        return Promise.resolve([]);
+    static getInfo(customerName: string): Promise<AxiosResponse<Ticket[]>> {
+        return instance.get(`/?name=${customerName}`)
     }
 }

@@ -3,6 +3,8 @@ import { Header, HeaderTab } from "../Header/Header";
 import { Centered } from "../Util/Centered";
 import { TicketPlan } from "../../Models/TicketPlan";
 import { TicketsApi } from "../../Service/TicketsApi";
+import { Link } from "react-router-dom";
+import { RouterPaths } from "../RoutedApp/RoutedApp";
 
 export const TicketsMarket = (props: any) => {
     const [plans, setPlans] = React.useState<TicketPlan[]>([]);
@@ -10,12 +12,11 @@ export const TicketsMarket = (props: any) => {
     const [purchasedPlans, setPurchasedPlans] = React.useState<TicketPlan[]>([]);
     const [customerName, setCustomerName] = React.useState<string>("");
 
-    const [successfulPurchases, setSuccessfulPurchases] = React.useState<any>([]);
+    const [isPurchaseSuccessful, setIsPurchaseSuccessful] = React.useState<boolean | undefined>(undefined);
 
     React.useEffect(() => {
         const fetchPlans = async () => {
             const response = await TicketsApi.getPlans()
-            console.table(response.data);
             setPlans(response.data);
         };
 
@@ -83,9 +84,11 @@ export const TicketsMarket = (props: any) => {
         event.preventDefault();
         event.stopPropagation();
 
-        let ticketIds = await TicketsApi.purchasePlans(customerName, purchasedPlans);
-        console.log(ticketIds);
-        setSuccessfulPurchases(ticketIds);
+        setIsPurchaseSuccessful(undefined);
+
+        await TicketsApi.purchasePlans(customerName, purchasedPlans);
+
+        setIsPurchaseSuccessful(true);
     }
 
     const nameAndPurchaseForm = () => {
@@ -99,9 +102,33 @@ export const TicketsMarket = (props: any) => {
         );
     };
 
+    const purchaseResultAlert = () => {
+        if (isPurchaseSuccessful !== undefined) {
+            if (isPurchaseSuccessful) {
+                return (
+                    <div className="alert alert-success">
+                        Successful purchase, visit
+                        <span> </span>
+                        <Link to={`${RouterPaths.ticketsWallet}?customerName=${customerName}`}>
+                            your wallet
+                        </Link>
+                        <span> </span>
+                        to check your tickets.
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="alert alert-danger">
+                        Sorry! Your purchase was unsuccessful.
+                    </div>
+                );
+            }
+        }
+    }
+
     return (
         <div className="container-fluid">
-            <Header selectedTab={HeaderTab.Tickets}/>
+            <Header selectedTab={HeaderTab.TicketsMarket}/>
             <Centered className="my-4">
                 <h2>Select a ticket plan to purchase</h2>
             </Centered>
@@ -110,6 +137,9 @@ export const TicketsMarket = (props: any) => {
             </div>
             <Centered className="my-4">
                 {nameAndPurchaseForm()}
+            </Centered>
+            <Centered>
+                {purchaseResultAlert()}
             </Centered>
         </div>
     );

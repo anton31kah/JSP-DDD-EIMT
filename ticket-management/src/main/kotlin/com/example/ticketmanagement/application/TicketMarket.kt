@@ -15,9 +15,6 @@ import java.time.ZoneId
 import javax.validation.ConstraintViolationException
 import javax.validation.Validator
 
-
-private val logger = KotlinLogging.logger {}
-
 @Service
 @Transactional
 class TicketMarket(
@@ -25,6 +22,8 @@ class TicketMarket(
         private val validator: Validator,
         amqpTemplate: AmqpTemplate
 ) {
+    private val logger = KotlinLogging.logger {}
+
     private val timeEventService = TimeEventSender(amqpTemplate)
 
     fun availablePlans(): List<TicketPlan> = TicketsPlans.predefined
@@ -42,15 +41,15 @@ class TicketMarket(
 
         val newTicket = ticketRepository.saveAndFlush(toDomainModel(ticketForm))
 
-        // no need to send anythingTicketId
-        logger.info { newTicket }
+        // no need to send anything
+        logger.info { newTicket.id.id }
 
         return newTicket
     }
 
     private fun toDomainModel(ticketForm: TicketForm): Ticket {
         val customer = Customer(ticketForm.customerName)
-        val boughtOn = LocalDateTime.ofInstant(timeEventService.instant(), ZoneId.of("UTC"))
+        val boughtOn = LocalDateTime.ofInstant(timeEventService.getTime(), ZoneId.of("UTC"))
         val expiryDate = boughtOn.plus(ticketForm.ticketPlan.validity).toLocalDate()
         val usages = Usages(ticketForm.ticketPlan.usages, ticketForm.ticketPlan.usages)
 

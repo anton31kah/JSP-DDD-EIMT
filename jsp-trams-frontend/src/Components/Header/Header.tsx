@@ -2,10 +2,12 @@ import React from "react";
 import './Header.css';
 import { RouterPaths } from "../RoutedApp/RoutedApp";
 import { Centered } from "../Util/Centered";
+import { Time } from "./Time";
 
 export enum HeaderTab {
     None = "None",
-    Tickets = "Tickets"
+    TicketsMarket = "TicketsMarket",
+    TicketsWallet = "TicketsWallet"
 }
 
 interface HeaderProps {
@@ -24,9 +26,13 @@ export const Header = (props: HeaderProps) => {
     }
 
     return (
-        <header className="row">
-            {tab(HeaderTab.None, RouterPaths.tickets)}
-            {tab(HeaderTab.Tickets, RouterPaths.tickets)}
-        </header>
+        <div>
+            <header className="row">
+                {tab(HeaderTab.None, RouterPaths.ticketsMarket)}
+                {tab(HeaderTab.TicketsMarket, RouterPaths.ticketsMarket)}
+                {tab(HeaderTab.TicketsWallet, RouterPaths.ticketsWallet)}
+            </header>
+            <Time/>
+        </div>
     )
 }

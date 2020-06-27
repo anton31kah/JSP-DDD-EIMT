@@ -6,7 +6,6 @@ import org.springframework.amqp.core.AmqpTemplate
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.time.Instant
 
 @RestController
 class TicketController(val template: AmqpTemplate) {

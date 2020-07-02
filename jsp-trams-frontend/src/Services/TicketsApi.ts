@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { TicketPlan } from "../Models/TicketPlan";
-import { Ticket, TicketId } from "../Models/Ticket";
+import { TicketPlan } from "Models/TicketPlan";
+import { Ticket, TicketId } from "Models/Ticket";
 
 const instance = axios.create({
     baseURL: "http://localhost:8081",

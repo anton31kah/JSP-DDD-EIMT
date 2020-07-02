@@ -1,20 +1,21 @@
 import React from "react";
 import './Header.css';
-import { RouterPaths } from "../RoutedApp/RoutedApp";
-import { Centered } from "../Util/Centered";
-import { Time } from "./Time";
+import { RouterPaths } from "Components/RoutedApp/RoutedApp";
+import { Centered } from "Components/Util/Centered";
+import { Time, TimeProps } from "Components/Header/Time";
 
 export enum HeaderTab {
-    None = "None",
-    TicketsMarket = "TicketsMarket",
-    TicketsWallet = "TicketsWallet"
+    None = "Home Page",
+    TicketsMarket = "Tickets Market",
+    TicketsWallet = "Tickets Wallet",
+    RidesChecking = "Rides Checking"
 }
 
 interface HeaderProps {
     selectedTab: HeaderTab;
 }
 
-export const Header = (props: HeaderProps) => {
+export const Header = (props: HeaderProps & TimeProps) => {
     const tab = (tab: HeaderTab, path: string) => {
         return (
             <Centered className={`col tab ${props.selectedTab === tab ? "selected" : ""}`}>
@@ -28,11 +29,12 @@ export const Header = (props: HeaderProps) => {
     return (
         <div>
             <header className="row">
-                {tab(HeaderTab.None, RouterPaths.ticketsMarket)}
+                {tab(HeaderTab.None, RouterPaths.app)}
                 {tab(HeaderTab.TicketsMarket, RouterPaths.ticketsMarket)}
                 {tab(HeaderTab.TicketsWallet, RouterPaths.ticketsWallet)}
+                {tab(HeaderTab.RidesChecking, RouterPaths.ridesChecking)}
             </header>
-            <Time/>
+            <Time onTimeChange={props.onTimeChange}/>
         </div>
     )
 }

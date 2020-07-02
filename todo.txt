@@ -1,1 +1,2 @@
-TODO: validators & constraints
+TODO: maven parent pom
+TODO: maven build 5 jars

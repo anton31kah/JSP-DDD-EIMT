@@ -1,11 +1,15 @@
 import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { Centered } from "../Util/Centered";
+import { Centered } from "Components/Util/Centered";
 import ReactDatePicker from "react-datepicker";
-import { TimeApi } from "../../Service/TimeApi";
+import { TimeApi } from "Services/TimeApi";
 import moment from "moment";
 
-export const Time = (props: any) => {
+export interface TimeProps {
+    onTimeChange?: (time: string) => void;
+}
+
+export const Time = (props: TimeProps) => {
     const [backendTime, setBackendTime] = React.useState<string>("");
     const [frontendTime, setFrontendTime] = React.useState<Date | null>(new Date());
 
@@ -18,6 +22,10 @@ export const Time = (props: any) => {
     React.useEffect(() => {
         fetchTime();
     }, []);
+
+    React.useEffect(() => {
+        props.onTimeChange?.(backendTime);
+    }, [backendTime, props.onTimeChange]);
 
     const setTimeClick = async (event: React.MouseEvent) => {
         event.preventDefault();

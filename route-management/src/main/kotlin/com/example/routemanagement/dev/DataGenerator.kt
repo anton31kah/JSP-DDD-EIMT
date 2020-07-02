@@ -21,12 +21,12 @@ class DataGenerator(
         val rideRepository: RideRepository
 ) {
     companion object {
-        const val rekordStopName = "rekord"
-        const val soborenHramStopName = "soboren hram"
-        const val gradezenStopName = "gradezen"
-        const val simpoStopName = "simpo"
-        const val hotelKarposStopName = "hotel karpos"
-        const val cityMallStopName = "city mall"
+        private const val rekordStopName = "rekord"
+        private const val soborenHramStopName = "soboren hram"
+        private const val gradezenStopName = "gradezen"
+        private const val simpoStopName = "simpo"
+        private const val hotelKarposStopName = "hotel karpos"
+        private const val cityMallStopName = "city mall"
     }
 
     @PostConstruct

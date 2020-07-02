@@ -9,10 +9,10 @@ import javax.persistence.*
 @Entity
 @Table(name = "completed_rides")
 data class CompletedRide(
-//        @OneToOne
-//        val ride: Ride,
-        @Column(nullable = false)
         @Embedded
+        @AttributeOverrides(
+                AttributeOverride(name = "id", column = Column(name = "ride_id", nullable = false))
+        )
         val rideId: RideId,
 
         @Column(nullable = false)

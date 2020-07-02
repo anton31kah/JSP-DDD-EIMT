@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { TimeChange } from "../Models/TimeChange";
+import { TimeChange } from "Models/TimeChange";
 
 const instance = axios.create({
     baseURL: "http://localhost:8084",

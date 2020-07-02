@@ -1,10 +1,10 @@
 import React from "react";
-import { Header, HeaderTab } from "../Header/Header";
-import { Centered } from "../Util/Centered";
-import { TicketPlan } from "../../Models/TicketPlan";
-import { TicketsApi } from "../../Service/TicketsApi";
+import { Header, HeaderTab } from "Components/Header/Header";
+import { Centered } from "Components/Util/Centered";
+import { TicketPlan } from "Models/TicketPlan";
+import { TicketsApi } from "Services/TicketsApi";
 import { Link } from "react-router-dom";
-import { RouterPaths } from "../RoutedApp/RoutedApp";
+import { RouterPaths } from "Components/RoutedApp/RoutedApp";
 
 export const TicketsMarket = (props: any) => {
     const [plans, setPlans] = React.useState<TicketPlan[]>([]);

@@ -4,16 +4,19 @@ import com.example.sharedkernel.domain.base.DomainEvent
 import java.time.Instant
 
 
-abstract class TimeEvent : DomainEvent
+sealed class TimeEvent : DomainEvent {
 
-class GetTimeEvent : TimeEvent()
+    object Get : TimeEvent()
 
-data class SetTimeEvent(val newTime: Instant) : TimeEvent()
+    data class Set(val newTime: Instant) : TimeEvent()
 
-class ResetTimeEvent : TimeEvent()
+    object Reset : TimeEvent()
 
-abstract class TimeEventResponse : DomainEvent
+    sealed class Response : DomainEvent {
 
-data class GetTimeEventResponse(val time: Instant) : TimeEventResponse()
+        data class Get(val time: Instant) : Response()
 
-class EmptyTimeEventResponse : TimeEventResponse()
+        object Empty : Response()
+
+    }
+}

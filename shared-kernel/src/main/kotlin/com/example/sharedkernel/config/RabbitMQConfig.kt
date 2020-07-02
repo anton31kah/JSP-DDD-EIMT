@@ -16,4 +16,9 @@ class RabbitMQConfig {
     fun ticketsQueue(): Queue {
         return Queue(EventsQueues.tickets)
     }
+
+    @Bean
+    fun ridesQueue(): Queue {
+        return Queue(EventsQueues.rides)
+    }
 }

@@ -7,5 +7,17 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5481/tickets_db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="RoutesDB" uuid="f6285b03-f81e-45c2-88df-7b6b05d701c6">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5483/routes_db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="RidesDB" uuid="72865e0f-2de9-4d4a-8461-225a54f8ef6d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5482/rides_db</jdbc-url>
+    </data-source>
   </component>
 </project>

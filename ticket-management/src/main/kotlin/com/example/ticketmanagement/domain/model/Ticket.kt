@@ -29,4 +29,9 @@ data class Ticket(
                 AttributeOverride(name = "left", column = Column(name = "left_usages", nullable = false))
         )
         val usages: Usages
-) : AbstractEntity<TicketId>(DomainObjectId.randomId(TicketId::class.java))
+) : AbstractEntity<TicketId>(DomainObjectId.randomId(TicketId::class.java)) {
+
+    fun checkOnce() {
+        usages.left--
+    }
+}

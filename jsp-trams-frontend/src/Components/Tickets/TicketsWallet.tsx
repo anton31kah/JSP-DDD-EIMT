@@ -1,9 +1,9 @@
 import React from "react";
-import { Header, HeaderTab } from "../Header/Header";
-import { Centered } from "../Util/Centered";
-import { TicketsApi } from "../../Service/TicketsApi";
+import { Header, HeaderTab } from "Components/Header/Header";
+import { Centered } from "Components/Util/Centered";
+import { TicketsApi } from "Services/TicketsApi";
 import { useLocation } from "react-router-dom";
-import { Ticket } from "../../Models/Ticket";
+import { Ticket } from "Models/Ticket";
 import moment from "moment";
 
 export const TicketsWallet = (props: any) => {
@@ -35,8 +35,8 @@ export const TicketsWallet = (props: any) => {
                 <p>out of {ticket.usages.initial}</p>
                 <p>to use until</p>
                 <b><p>{moment(ticket.expiryDate).format("MMMM Do, YYYY")}</p></b>
-                <p>bought on {moment(ticket.boughtOn).format("MMMM Do YYYY, h:mm:ss a")}</p>
-                <p>which was {moment(ticket.boughtOn).fromNow()}</p>
+                <p>bought on {moment.utc(ticket.boughtOn).format("MMMM Do YYYY, h:mm:ss a")}</p>
+                <p>which was {moment.utc(ticket.boughtOn).fromNow()}</p>
             </div>
         )
     }
@@ -64,7 +64,6 @@ export const TicketsWallet = (props: any) => {
             <Centered className="my-4">
                 {nameAndSearchForm()}
             </Centered>
-            {/*<div className="d-flex justify-content-around">*/}
             <div className="d-flex flex-wrap justify-content-around">
                 {tickets.map(ticketView)}
             </div>

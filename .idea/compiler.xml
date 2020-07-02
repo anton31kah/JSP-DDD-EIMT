@@ -20,6 +20,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="jsp-ddd-eimt" options="-parameters" />
       <module name="ride-management" options="-parameters" />
       <module name="route-management" options="-parameters" />
       <module name="shared-kernel" options="-parameters" />

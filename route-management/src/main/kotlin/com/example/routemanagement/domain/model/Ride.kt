@@ -13,10 +13,10 @@ data class Ride(
         @Embedded
         val route: Route,
 
-        @ElementCollection
+        @ElementCollection(fetch = FetchType.EAGER)
         val occurrences: List<TimePoint>,
 
-        @ManyToMany
+        @ManyToMany(fetch = FetchType.EAGER)
         @OrderColumn(name = "stops_order")
         val stops: List<Stop>
 ) : AbstractEntity<RideId>(DomainObjectId.randomId(RideId::class.java))

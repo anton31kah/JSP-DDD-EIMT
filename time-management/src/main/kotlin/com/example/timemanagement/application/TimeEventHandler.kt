@@ -1,19 +1,20 @@
 package com.example.timemanagement.application
 
-import com.example.sharedkernel.event.*
+import com.example.sharedkernel.event.EventsQueues
+import com.example.sharedkernel.event.TimeEvent
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Component
 
 @Component
 class TimeEventHandler {
     @RabbitListener(queues = [EventsQueues.time])
-    fun listen(event: TimeEvent): TimeEventResponse {
+    fun listen(event: TimeEvent): TimeEvent.Response {
         when (event) {
-            is GetTimeEvent -> return GetTimeEventResponse(CustomTime.getTime())
-            is SetTimeEvent -> CustomTime.setTime(event.newTime)
-            is ResetTimeEvent -> CustomTime.resetTime()
+            is TimeEvent.Get -> return TimeEvent.Response.Get(CustomTime.getTime())
+            is TimeEvent.Set -> CustomTime.setTime(event.newTime)
+            is TimeEvent.Reset -> CustomTime.resetTime()
         }
 
-        return EmptyTimeEventResponse()
+        return TimeEvent.Response.Empty
     }
 }
